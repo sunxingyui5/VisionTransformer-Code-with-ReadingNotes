@@ -60,7 +60,7 @@ Vision Transformer在有足够数据去预训练的情况下，就能在下游�
 “\*”为特殊字符，用于分类（此方法继承自[BERT](https://readpaper.com/paper/2963341956)），模型会根据“\*”的输出做一个判断  
 
 **计算流程：**  
-①图片$X:224\times 224\times 3\overset{16\times 16 patch}{\longrightarrow}16\times 16\times 3=768$（从头到尾向量长度都是768），生成patch的数量为$N=\frac{224^2}{16^2}=196$，最终生成一个维度为$196\times 768$的矩阵  
+①图片$X:224\times 224\times 3\overset{16\times 16 patch}{\longrightarrow}16\times 16\times 3=768$（从头到尾向量长度都是768），生成patch的数量为$N=\frac{224^2}{16^2}=196$，最终生成一个维度为![](http://latex.codecogs.com/svg.latex?196\\times768)的矩阵  
 ②E：Linear Projection of Flattened Patches（全连接层），维度为$768\times 768$  
 ③Patch Embedding：$X \cdot E=(196 \space 768)\begin{pmatrix}768 \\768\end{pmatrix}=(196\space 768)+$位置编码$\longrightarrow (197\space 768)$
 ![processing](https://github.com/sunxingyui5/VisionTransformer-Code-with-ReadingNotes/blob/main/img/processing.jpg)  
