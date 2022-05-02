@@ -22,7 +22,7 @@ Transformer在计算用于高效性，在训练上拥有可扩展性，现在已
 问题：图像转为序列的长度太长，导致没办法把Transformer用到视觉里来  
 所以需要想办法降低序列的长度：用特征图当作Transformer的输入，降低序列长度  
 >孤立自注意力：用一个局部的小窗口（类似卷积操作中的卷积核）  
->轴自注意力：![](http://latex.codecogs.com/svg.latex?N=H\times W)（序列长度=高X宽），在![](http://latex.codecogs.com/svg.latex?H)上做一个self-attention，在![](http://latex.codecogs.com/svg.latex?W)上做一个self-attention  
+>轴自注意力：![](http://latex.codecogs.com/svg.latex?N=H)X![](http://latex.codecogs.com/svg.latex?W)（序列长度=高X宽），在![](http://latex.codecogs.com/svg.latex?H)上做一个self-attention，在![](http://latex.codecogs.com/svg.latex?W)上做一个self-attention  
 
 在大规模的图像识别上，传统的残差连接网络效果还是最好的  
 本文想要实现的是：一个直接应用Transformer的模型，直接作用于图片，尽量做少的修改  
