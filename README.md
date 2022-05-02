@@ -26,21 +26,17 @@ Transformer在计算用于高效性，在训练上拥有可扩展性，现在已
 
 在大规模的图像识别上，传统的残差连接网络效果还是最好的  
 本文想要实现的是：一个直接应用Transformer的模型，直接作用于图片，尽量做少的修改  
-Vision Transformer的做法：把图片分成很多个patch，每个patch是$16\times 16$
+Vision Transformer的做法：把图片分成很多个patch，每个patch是![](http://latex.codecogs.com/svg.latex?16)X![](http://latex.codecogs.com/svg.latex?16)
 ![patch](https://github.com/sunxingyui5/VisionTransformer-Code-with-ReadingNotes/blob/main/img/patch.jpg)
 把每个个patch当作一个元素，通过一个fc层，就会得到一个liner embedding，把这些当作输入传给Transformer  
-一个patch等价于一个$16\times 16$的单词（点题了）  
+一个patch等价于一个![](http://latex.codecogs.com/svg.latex?16)X![](http://latex.codecogs.com/svg.latex?16)的单词（点题了）  
 做有监督的训练  
 ViT把计算机视觉问题当成NLP去做，中间的模型和BERT完全一样  
 ViT在中型大小的数据集（Image Net）上训练，如果不加比较强的约束，ViT比同等大小的ResNet其实要弱几个点的，因为与CNN相比，Transformer少了一些归纳偏置（inductive bias：一种先验知识）  
-$$ CNN的归纳偏置\left\{
-\begin{matrix}
- locality：假设图片上相邻的区域会有相似的特征（即卷积核感受野中像素都是邻近的） \\
-    \\
- translation equivalence：即f(g(x))=g(f(x))，无论先平移还是先卷积，效果一样 
-\end{matrix}
-\right.
-$$   
+**CNN的归纳偏置：**
+>locality：假设图片上相邻的区域会有相似的特征（即卷积核感受野中像素都是邻近的）
+>translation equivalence：即![](http://latex.codecogs.com/svg.latex?f\(g\(x\)\)=g\(f\(x\)\))，无论先平移还是先卷积，效果一样 
+  
 不同于CNN，Transformer只能从数据中自己学，但是大规模预训练效果比归纳偏置要好  
 Vision Transformer在有足够数据去预训练的情况下，就能在下游任务上得到很好的前移学习效果，获得跟当前最好的ResNet相似，或更好的效果  
 
