@@ -1,7 +1,12 @@
 ## An image is worth 16x16 words: Transformers for image recognition at scale  
 **阅读地址：** [An image is worth 16x16 words: Transformers for image recognition at scale](https://readpaper.com/paper/3094502228)  
+
+**知乎精讲：** [Vision Transformer精读笔记](https://zhuanlan.zhihu.com/p/508358869)
+
 **推荐学习视频：** [ViT论文逐段精读【论文精读】](https://www.bilibili.com/video/BV15P4y137jb?spm_id_from=333.999.0.0)  
-**被引用次数：**   
+
+**被引用次数：**   3756（截至2022.05.02）
+
 **官方开源：** [vision_transformer](https://github.com/google-research/vision_transformer)  
 
 ### Vision Transformer的价值  
