@@ -8,7 +8,7 @@
 证明了：如果在足够多的数据上去做预训练，那么也可以不需要CNN，直接用Transformer模型也能把视觉问题解决的很好  
 打破了计算机视觉（Computer Vision）和自认语言处理（Natural Language Processing）在模型上的壁垒  
 实现了一些在CNN上处理不够好的例子（[Intriguing Properties of Vision Transformers](https://readpaper.com/paper/3094502228)中证明）
-![examples](examples.jpg)
+![examples](https://github.com/sunxingyui5/VisionTransformer-Code-with-ReadingNotes/blob/main/img/examples.jpg)
 以上案列在vision transformer中处理效果优于CNN  
 
 ### 摘要  
@@ -27,7 +27,7 @@ Transformer在计算用于高效性，在训练上拥有可扩展性，现在已
 在大规模的图像识别上，传统的残差连接网络效果还是最好的  
 本文想要实现的是：一个直接应用Transformer的模型，直接作用于图片，尽量做少的修改  
 Vision Transformer的做法：把图片分成很多个patch，每个patch是$16\times 16$
-![patch](patch.jpg)
+![patch](https://github.com/sunxingyui5/VisionTransformer-Code-with-ReadingNotes/blob/main/img/patch.jpg)
 把每个个patch当作一个元素，通过一个fc层，就会得到一个liner embedding，把这些当作输入传给Transformer  
 一个patch等价于一个$16\times 16$的单词（点题了）  
 做有监督的训练  
@@ -60,18 +60,18 @@ Vision Transformer在有足够数据去预训练的情况下，就能在下游�
 >③送入Transformer Encoder
 
 
-![ViT](ViT.png)  
+![ViT](https://github.com/sunxingyui5/VisionTransformer-Code-with-ReadingNotes/blob/main/img/ViT.png)  
 “\*”为特殊字符，用于分类（此方法继承自[BERT](https://readpaper.com/paper/2963341956)），模型会根据“\*”的输出做一个判断  
 
 **计算流程：**  
 ①图片$X:224\times 224\times 3\overset{16\times 16 patch}{\longrightarrow}16\times 16\times 3=768$（从头到尾向量长度都是768），生成patch的数量为$N=\frac{224^2}{16^2}=196$，最终生成一个维度为$196\times 768$的矩阵  
 ②E：Linear Projection of Flattened Patches（全连接层），维度为$768\times 768$  
 ③Patch Embedding：$X \cdot E=(196 \space 768)\begin{pmatrix}768 \\768\end{pmatrix}=(196\space 768)+$位置编码$\longrightarrow (197\space 768)$
-![processing](processing.jpg)  
+![processing](https://github.com/sunxingyui5/VisionTransformer-Code-with-ReadingNotes/blob/main/img/processing.jpg)  
 
 **Transformer Encoder：**  
 模型上的解释：  
-![Encoder](Encoder.jpg)  
+![Encoder](https://github.com/sunxingyui5/VisionTransformer-Code-with-ReadingNotes/blob/main/img/Encoder.jpg)  
 
 ### Head Type and Class Token  
 对ViT来说：怎么对图片预处理和怎么对获得的输出进行后处理，很关键  
@@ -80,17 +80,17 @@ Class Token：全局对图片理解的特征（Class Token的设计是从NLP领�
 
 ### ResNet和Vision Transformer在图片处理思路上的不同  
 **ResNet：** 求出一个从全局对图片特征的理解 
-![ResNetprocess](ResNetprocess.jpg)  
+![ResNetprocess](https://github.com/sunxingyui5/VisionTransformer-Code-with-ReadingNotes/blob/main/img/ResNetprocess.jpg)  
 
 **Vision Transformer：** 与原始的Transformer尽可能保持一致 
-![ViTprocess](ViTprocess.jpg)  
+![ViTprocess](https://github.com/sunxingyui5/VisionTransformer-Code-with-ReadingNotes/blob/main/img/ViTprocess.jpg)  
 
 ### Positional Embedding  
 1-d：本文中使用的，同时也是NLP中常用的  
 2-d：用$(11,12,13,21,22,23)$去表示图像块（用$\frac{D}{2}$描述横坐标，$\frac{D}{2}$描述纵坐标）  
 Relative Positional Embedding（相对位置编码）：如2和5，相对位置是3
 >因为用的是图片块而不是像素块，所以去排列组合小块，想知道这些小块的位置信息还是比较容易的，所以用什么位置编码区别不大
->![relativepositionembedding](relativepositionembedding.png)
+>![relativepositionembedding](https://github.com/sunxingyui5/VisionTransformer-Code-with-ReadingNotes/blob/main/img/relativepositionembedding.png)
 
 Class Token也可以用Global Average Pooling去替换  
 1-d Positional Embedding也可以用2-d或者相对位置编码去替换  
@@ -98,7 +98,7 @@ Vision Transformer为与Transformer保持一致，所以使用了Class Token和1
 
 ### Transformer Encoder推导  
 公式推导：  
-![mathEncoder](mathEncoder.jpg)  
+![mathEncoder](https://github.com/sunxingyui5/VisionTransformer-Code-with-ReadingNotes/blob/main/img/mathEncoder.jpg)  
 
 ### Inductive vias（归纳偏置）  
 Vision Transformer比CNN少很多图像特有的归纳偏置  
@@ -116,7 +116,7 @@ $$
 ### Hybrid Architecture（混合模型）  
 Transformer全局建模的能力比较强，CNN拥有归纳偏置不用那么多的训练数据  
 **混合模型：** 前面是CNN，后面是Transformer
-![HybridArchitecture](HybridArchitecture.jpg)  
+![HybridArchitecture](https://github.com/sunxingyui5/VisionTransformer-Code-with-ReadingNotes/blob/main/img/HybridArchitecture.jpg)  
 
 ### Fine-Tuning（微调）  
 如果在微调的时候能用比较大的图像尺寸，就能得到更好的结果  
@@ -127,12 +127,12 @@ Transformer全局建模的能力比较强，CNN拥有归纳偏置不用那么多
 **主要对比：** ResNet，ViT和混合模型的表征学习能力  
 在考虑到预训练的代价（时间）时，ViT表现的非常好，能在大多数数据集上取得最好的效果，同时训练时间更少  
 在大规模数据集（JFT：图片数量303million）上预训练过的ViT
-![experiment](experiment.png)
+![experiment](https://github.com/sunxingyui5/VisionTransformer-Code-with-ReadingNotes/blob/main/img/experiment.png)
 上述结果表明：ViT在TPUv3上训练2.5k天的效果超过了ResNet训练9k天的效果  
 
 ### ViT到底需要多少数据才能训练的比较好？  
 ViT在中小数据集做预训练效果远不如ResNet，因为没用那些先验知识，但在大新数据集上ViT全面超越ResNet  
 经过反复对照实验，如果想预训练ViT那至少需要包含图片14million左右的数据集
-![datasets](datasets.jpg)  
+![datasets](https://github.com/sunxingyui5/VisionTransformer-Code-with-ReadingNotes/blob/main/img/datasets.jpg)  
 但是实验同样发现：在比较小的数据集上，混合模型的精度非常高
-![hybrid](hybrid.png)
+![hybrid](https://github.com/sunxingyui5/VisionTransformer-Code-with-ReadingNotes/blob/main/img/hybrid.png)
