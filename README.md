@@ -34,7 +34,7 @@ Vision Transformer的做法：把图片分成很多个patch，每个patch是![](
 ViT把计算机视觉问题当成NLP去做，中间的模型和BERT完全一样  
 ViT在中型大小的数据集（Image Net）上训练，如果不加比较强的约束，ViT比同等大小的ResNet其实要弱几个点的，因为与CNN相比，Transformer少了一些归纳偏置（inductive bias：一种先验知识）  
 **CNN的归纳偏置：**
->locality：假设图片上相邻的区域会有相似的特征（即卷积核感受野中像素都是邻近的）
+>locality：假设图片上相邻的区域会有相似的特征（即卷积核感受野中像素都是邻近的）  
 >translation equivalence：即![](http://latex.codecogs.com/svg.latex?f\(g\(x\)\)=g\(f\(x\)\))，无论先平移还是先卷积，效果一样 
   
 不同于CNN，Transformer只能从数据中自己学，但是大规模预训练效果比归纳偏置要好  
@@ -60,7 +60,7 @@ Vision Transformer在有足够数据去预训练的情况下，就能在下游�
 “\*”为特殊字符，用于分类（此方法继承自[BERT](https://readpaper.com/paper/2963341956)），模型会根据“\*”的输出做一个判断  
 
 **计算流程：**  
-①图片$X:224\times 224\times 3\overset{16\times 16 patch}{\longrightarrow}16\times 16\times 3=768$（从头到尾向量长度都是768），生成patch的数量为$N=\frac{224^2}{16^2}=196$，最终生成一个维度为![](http://latex.codecogs.com/svg.latex?196\\times768)的矩阵  
+①图片![](http://latex.codecogs.com/svg.latex?X:224)X![](http://latex.codecogs.com/svg.latex?224X![](http://latex.codecogs.com/svg.latex?3)\overset{16\times 16 patch}{\longrightarrow}16\times 16\times 3=768$（从头到尾向量长度都是768），生成patch的数量为$N=\frac{224^2}{16^2}=196$，最终生成一个维度为![](http://latex.codecogs.com/svg.latex?196)X![](http://latex.codecogs.com/svg.latex?768)的矩阵  
 ②E：Linear Projection of Flattened Patches（全连接层），维度为$768\times 768$  
 ③Patch Embedding：$X \cdot E=(196 \space 768)\begin{pmatrix}768 \\768\end{pmatrix}=(196\space 768)+$位置编码$\longrightarrow (197\space 768)$
 ![processing](https://github.com/sunxingyui5/VisionTransformer-Code-with-ReadingNotes/blob/main/img/processing.jpg)  
